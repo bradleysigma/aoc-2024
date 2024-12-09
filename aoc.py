@@ -2,6 +2,11 @@ from time import time
 
 t = time()
 
+adjt = [(0,1), (0,-1), (1,0), (-1,0), (1,1), (-1,-1), (1,-1), (-1,1)]
+orth = [(0,1), (0,-1), (1,0), (-1,0)]
+diag = [(1,1), (-1,-1), (1,-1), (-1,1)]
+
+
 
 def tock(units="s"):
     print(f'{(time() - t) * {"h": 1/3600, "m": 1/60, "s": 1, "ms": 1000, "us": 1e6}[units]:.2f}{units}')
@@ -14,6 +19,11 @@ def read(n):
 
 def strlist(n, t=list, d="\n"):
     return t(read(n).split(d))
+
+
+def strdict(n, d="\n", *, cpx=False):
+    x = read(n).split(d)
+    return {(i+j*1j if cpx else (i,j)): x[j][i] for j in range(len(x)) for i in range(len(x[j]))}
 
 
 def wordgroups(n, t=list, d="\n", g=" "):
