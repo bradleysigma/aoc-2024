@@ -39,7 +39,10 @@ def intlist(n, t=list, d="\n"):
 def strgroups(n, t=list):
     return t(i.split("\n") for i in read(n).split("\n\n"))
 
-def intgrid(n, t=list):
+def intgrid(n, t=list, *, cpx=False):
+    if cpx:
+        x = intgrid(n, t)
+        return {(i+j*1j): x[j][i] for j in range(len(x)) for i in range(len(x[j]))}
     return t(map(lambda x: t(map(int, x)), read(n).split("\n")))
 
 
